@@ -25,19 +25,25 @@ public class Helicopter extends Aircraft implements Flyable
 		if (conditions.equals("RAIN"))
 		{
 			this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() + 5);
+			Simulator.logMessage.add("Helicopter#"+name+"("+id+") oh crap its raining.");
 		}
 		else if (conditions.equals("FOG"))
 		{
 			this.coordinates = new Coordinates(coordinates.getLongitude() + 1, coordinates.getLatitude(), coordinates.getHeight());
+			Simulator.logMessage.add("Helicopter#"+name+"("+id+") oh wow we not seeing a thing.");
 		}
 		else if (conditions.equals("SUN"))
 		{
 			this.coordinates = new Coordinates(coordinates.getLongitude() + 10, coordinates.getLatitude(), coordinates.getHeight() + 2);
+			Simulator.logMessage.add("Helicopter#"+name+"("+id+") let's enjoy the the sun.");
 		}
 		else if (conditions.equals("SNOW"))
 		{
 			this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 12);
+			Simulator.logMessage.add("Helicopter#"+name+"("+id+") wow its so cold.");
 		}
+		if (coordinates.getHeight() == 0)
+			weatherTower.unregister(this);
 		return ;
 	}
 

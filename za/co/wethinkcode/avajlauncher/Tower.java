@@ -9,7 +9,7 @@ public abstract class Tower
     /*
     * Attributes
     */
-    private List<Flyable>  observers = new ArrayList<Flyable>();
+    private ArrayList<Flyable>  observers = new ArrayList<Flyable>();
 
     /*
     * Methods
@@ -28,8 +28,10 @@ public abstract class Tower
 
     protected void  conditionsChanged()
     {
-        for (Flyable fly: observers)
-            fly.updateConditions();
+        // for (Flyable fly: observers)
+        //     fly.updateConditions();
+        // for (int i = 0; i < observers.size(); i++)
+        //     observers[i].updateConditions();
         return ;
     }
 }

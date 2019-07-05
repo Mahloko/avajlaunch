@@ -1,7 +1,10 @@
 package za.co.wethinkcode.avajlauncher;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.Writer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,7 @@ public class Simulator
 	{
 		int i = 0;
 		BufferedReader reader = null;
+		WeatherTower tower = new WeatherTower();
 		try {
 			reader = new BufferedReader(new FileReader(args[0]));
 			String line = null;
@@ -47,11 +51,20 @@ public class Simulator
 			}
 		}
 		for (Flyable fly: vehicles)
+			fly.registerTower(tower);
+			while (i-- > 0)
+				tower.changeWeather();
+		try (BufferedWriter writter =  new BufferedWriter(new FileWriter("simulation.txt")))
 		{
-			fly.registerTower(new WeatherTower());
-			fly.updateConditions();
+			for (String message: logMessage)
+			{
+				writter.write(message);
+				writter.newLine();
+			}
 		}
-		for (String message: logMessage)
-			System.out.println(message);
+		catch (IOException e)
+		{
+			System.out.println(e.getMessage());
+		}
 	}
 }
