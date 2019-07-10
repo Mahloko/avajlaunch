@@ -11,60 +11,94 @@ import java.util.List;
 
 public class Simulator
 {
+	public static int i = 0;
 	public static List<Flyable>  vehicles = new ArrayList<Flyable>();
 	public static List<String>  logMessage = new ArrayList<String>();
+	public static List<String>  fileContents = new ArrayList<String>();
 	
 	public static void main(String[] args)
 	{
-		int i = 0;
-		BufferedReader reader = null;
 		WeatherTower tower = new WeatherTower();
-		try {
-			reader = new BufferedReader(new FileReader(args[0]));
-			String line = null;
-			line = reader.readLine();
-			i = Integer.valueOf(line);
-			while ((line = reader.readLine()) != null)
-			{
-				String[] parts = line.split(" ");
-				vehicles.add(AircraftFactory.newAircraft(parts[0],
-														parts[1],
-														Integer.valueOf(parts[2]),
-														Integer.valueOf(parts[3]),
-														Integer.valueOf(parts[4])));
-			}
-		}
-		catch (IOException e)
+		try (BufferedReader reader  = new BufferedReader(new FileReader(args[0])))
 		{
-			System.out.println(e.getMessage());
-		}
-		finally
-		{
-			try
+			scenarioReader(reader, args[0]);
+			parseScenario();
+			for (Flyable fly: vehicles)
+			fly.registerTower(tower);
+			while (i-- > 0)
+				tower.changeWeather();
+			try (BufferedWriter writter =  new BufferedWriter(new FileWriter("simulation.txt")))
 			{
-				if (reader != null)
-				reader.close();
+				scenarioWriter(writter);
 			}
 			catch (IOException e)
 			{
 				System.out.println(e.getMessage());
 			}
 		}
-		for (Flyable fly: vehicles)
-			fly.registerTower(tower);
-			while (i-- > 0)
-				tower.changeWeather();
-		try (BufferedWriter writter =  new BufferedWriter(new FileWriter("simulation.txt")))
+		catch (SimulatorException e)
 		{
-			for (String message: logMessage)
-			{
-				writter.write(message);
-				writter.newLine();
-			}
+			System.out.println(e.getMessage());
+			if (e.getCause() != null)
+				System.out.println("Original exception: " + e.getCause().getMessage());
 		}
 		catch (IOException e)
 		{
 			System.out.println(e.getMessage());
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private static void	scenarioReader(BufferedReader reader, String file) throws IOException
+	{
+		String line = null;
+		while ((line = reader.readLine()) != null)
+			fileContents.add(line);
+	}
+
+	private static void	scenarioWriter(BufferedWriter writter) throws IOException
+	{
+		for (String message: logMessage)
+		{
+			writter.write(message);
+			writter.newLine();
+		}
+	}
+
+	private static void parseScenario() throws SimulatorException
+	{
+		String[] parts = null;
+		try
+		{
+			i = Integer.valueOf(fileContents.get(0));
+			if (i < 1)
+				throw new SimulatorException("Number of circles can't be less than 1", fileContents.get(0));
+		}
+		catch(NumberFormatException e)
+		{
+			throw new SimulatorException("Expected a number", fileContents.get(0), e);
+		}
+		for(int j = 1; j < fileContents.size(); j++)
+		{
+			parts = fileContents.get(j).split(" ");
+			if (parts.length != 5)
+				throw new SimulatorException("Invalid line format", fileContents.get(j));
+			try
+			{
+
+				vehicles.add(AircraftFactory.newAircraft(parts[0],
+														parts[1],
+														Integer.valueOf(parts[2]),
+														Integer.valueOf(parts[3]),
+														Integer.valueOf(parts[4])));
+			}
+			catch(NumberFormatException e)
+			{
+				throw new SimulatorException("Expected a number", fileContents.get(0), e);
+			}
 		}
 	}
 }

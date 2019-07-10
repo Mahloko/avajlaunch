@@ -42,7 +42,10 @@ public class Baloon extends Aircraft implements Flyable
 			Simulator.logMessage.add("Baloon#"+name+"("+id+") its feezing ballz out here.");
 		}
 		if (coordinates.getHeight() == 0)
+		{
 			weatherTower.unregister(this);
+			Simulator.logMessage.add("Baloon#"+name+"("+id+") Landing ...");
+		}
 		return ;
 	}
 

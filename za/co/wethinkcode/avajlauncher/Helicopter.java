@@ -43,7 +43,10 @@ public class Helicopter extends Aircraft implements Flyable
 			Simulator.logMessage.add("Helicopter#"+name+"("+id+") wow its so cold.");
 		}
 		if (coordinates.getHeight() == 0)
+		{
 			weatherTower.unregister(this);
+			Simulator.logMessage.add("Helicopter#"+name+"("+id+") Landing ...");
+		}
 		return ;
 	}
 
