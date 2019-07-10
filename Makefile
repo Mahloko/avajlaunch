@@ -6,7 +6,7 @@
 #    By: mmahloko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/01 14:29:12 by mmahloko          #+#    #+#              #
-#    Updated: 2019/07/10 14:56:50 by mmahloko         ###   ########.fr        #
+#    Updated: 2019/07/10 15:52:11 by mmahloko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,9 @@ bin : $(OBJ)
 $(package)Simulator.class : $(package)Simulator.java
 	javac $(package)Simulator.java
 
+$(package)SimulatorException.class : $(package)SimulatorException.java
+	javac $(package)SimulatorException.java
+
 $(package)Aircraft.class : $(package)Aircraft.java
 	javac $(package)Aircraft.java
 
@@ -57,19 +60,19 @@ $(package)Flyable.class : $(package)Flyable.java
 	javac $(package)Flyable.java
 
 $(package)Baloon.class : $(package)Baloon.java
-	@javac $(package)Baloon.java
+	javac $(package)Baloon.java
 	
 $(package)Helicopter.class : $(package)Helicopter.java
-	@javac $(package)Helicopter.java
+	javac $(package)Helicopter.java
 	
 $(package)JetPlane.class : $(package)JetPlane.java
-	@javac $(package)JetPlane.java
+	javac $(package)JetPlane.java
 
 $(package)Tower.class : $(package)Tower.java
 	javac $(package)Tower.java
 
 $(package)WeatherTower.class : $(package)WeatherTower.java
-	@javac $(package)WeatherTower.java
+	javac $(package)WeatherTower.java
 	
 $(package)weather/WeatherProvider.class : $(package)weather/WeatherProvider.java
 	javac $(package)weather/WeatherProvider.java
