@@ -6,13 +6,14 @@
 #    By: mmahloko <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/01 14:29:12 by mmahloko          #+#    #+#              #
-#    Updated: 2019/07/10 15:52:11 by mmahloko         ###   ########.fr        #
+#    Updated: 2019/07/10 15:56:23 by mmahloko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 package = ./za/co/wethinkcode/avajlauncher/
 
 SRC = 	$(package)Simulator.java \
+		$(package)SimulatorException.class \
 		$(package)Aircraft.java \
 		$(package)AircraftFactory.java \
 		$(package)Baloon.java \
@@ -25,6 +26,7 @@ SRC = 	$(package)Simulator.java \
 		$(package)WeatherTower.java \
 
 OBJ = 	$(package)Simulator.class \
+		$(package)SimulatorException.class \
 		$(package)Aircraft.class \
 		$(package)AircraftFactory.class \
 		$(package)Baloon.class \
