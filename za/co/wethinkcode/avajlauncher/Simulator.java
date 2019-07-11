@@ -71,6 +71,7 @@ public class Simulator
 	private static void parseScenario() throws SimulatorException
 	{
 		String[] parts = null;
+		int j;
 		try
 		{
 			i = Integer.valueOf(fileContents.get(0));
@@ -79,9 +80,10 @@ public class Simulator
 		}
 		catch(NumberFormatException e)
 		{
+		
 			throw new SimulatorException("Expected a number", fileContents.get(0), e);
 		}
-		for(int j = 1; j < fileContents.size(); j++)
+		for(j = 1; j < fileContents.size(); j++)
 		{
 			parts = fileContents.get(j).split(" ");
 			if (parts.length != 5)
@@ -97,7 +99,7 @@ public class Simulator
 			}
 			catch(NumberFormatException e)
 			{
-				throw new SimulatorException("Expected a number", fileContents.get(0), e);
+				throw new SimulatorException("Expected a number", fileContents.get(j), e);
 			}
 		}
 	}

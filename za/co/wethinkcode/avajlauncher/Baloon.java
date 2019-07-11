@@ -43,8 +43,10 @@ public class Baloon extends Aircraft implements Flyable
 		}
 		if (coordinates.getHeight() == 0)
 		{
-			weatherTower.unregister(this);
 			Simulator.logMessage.add("Baloon#"+name+"("+id+") Landing ...");
+			weatherTower.unregister(this);
+			Simulator.logMessage.add("Tower says: Baloon#"+name+"("+id+") unregistered from weather tower.");
+			Simulator.logMessage.add("Baloon#"+name+"("+id+"): Coordinates -> latitude: " + coordinates.getLatitude() + " longitude: " + coordinates.getLongitude());
 		}
 		return ;
 	}
