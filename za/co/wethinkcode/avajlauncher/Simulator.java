@@ -80,7 +80,6 @@ public class Simulator
 		}
 		catch(NumberFormatException e)
 		{
-		
 			throw new SimulatorException("Expected a number", fileContents.get(0), e);
 		}
 		for(j = 1; j < fileContents.size(); j++)
@@ -88,7 +87,7 @@ public class Simulator
 			parts = fileContents.get(j).split(" ");
 			if (parts.length != 5)
 				throw new SimulatorException("Invalid line format", fileContents.get(j));
-			if (Integer.valueOf(parts[2]) < 0 || Integer.valueOf(parts[2]) < 0 || Integer.valueOf(parts[2]) < 0)
+			if (Integer.valueOf(parts[2]) < 0 || Integer.valueOf(parts[3]) < 0 || Integer.valueOf(parts[4]) < 0)
 				throw new SimulatorException("longitude, latitude and height are supposed to be positive numbers", fileContents.get(j));
 			if (parts[0].equals("Baloon") || parts[0].equals("JetPlane") || parts[0].equals("Helicopter"))
 			{
