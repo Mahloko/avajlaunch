@@ -88,19 +88,26 @@ public class Simulator
 			parts = fileContents.get(j).split(" ");
 			if (parts.length != 5)
 				throw new SimulatorException("Invalid line format", fileContents.get(j));
-			try
+			if (Integer.valueOf(parts[2]) < 0 || Integer.valueOf(parts[2]) < 0 || Integer.valueOf(parts[2]) < 0)
+				throw new SimulatorException("longitude, latitude and height are supposed to be positive numbers", fileContents.get(j));
+			if (parts[0].equals("Baloon") || parts[0].equals("JetPlane") || parts[0].equals("Helicopter"))
 			{
+				try
+				{
 
-				vehicles.add(AircraftFactory.newAircraft(parts[0],
-														parts[1],
-														Integer.valueOf(parts[2]),
-														Integer.valueOf(parts[3]),
-														Integer.valueOf(parts[4])));
+					vehicles.add(AircraftFactory.newAircraft(parts[0],
+															parts[1],
+															Integer.valueOf(parts[2]),
+															Integer.valueOf(parts[3]),
+															Integer.valueOf(parts[4])));
+				}
+				catch(NumberFormatException e)
+				{
+					throw new SimulatorException("Expected a number", fileContents.get(j), e);
+				}
 			}
-			catch(NumberFormatException e)
-			{
-				throw new SimulatorException("Expected a number", fileContents.get(j), e);
-			}
+			else
+				throw new SimulatorException(parts[0]+" is not recognized as an aircraft on line", "'"+j+"'");
 		}
 	}
 }
