@@ -7,7 +7,6 @@ public class JetPlane extends Aircraft implements Flyable {
 		super(name, coordinates);
 	}
 
-
 	public void	updateConditions() {
 		final String conditions = weatherTower.getWeather(coordinates);
 		switch (conditions) {

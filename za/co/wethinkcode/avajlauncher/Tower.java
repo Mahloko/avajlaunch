@@ -2,8 +2,6 @@ package za.co.wethinkcode.avajlauncher;
 
 import java.util.ArrayList;
 
-import java.util.List;
-
 public abstract class Tower {
 
     private final ArrayList<Flyable>  observers = new ArrayList<>();
