@@ -1,31 +1,18 @@
 package za.co.wethinkcode.avajlauncher;
 
-public abstract class Aircraft
-{
-	/*
-    * Attributes
-    */
+public abstract class Aircraft {
 	protected long			id;
 	protected String		name;
 	protected Coordinates	coordinates;
-	private	static long			idCounter = 0;
+	private	static long		ID = 0;
 
-	/*
-    * Constructor
-    */
-	protected		Aircraft(String name, Coordinates coordinates)
-	{
+	protected Aircraft(final String name, final Coordinates coordinates) {
 		this.name = name;
 		this.coordinates = coordinates;
 		id = nextId();
-		return ;
 	}
 
-	/*
-    * Methods
-    */
-	private long	nextId()
-	{
-		return ++idCounter;
+	private long nextId() {
+		return ++ID;
 	}
 }

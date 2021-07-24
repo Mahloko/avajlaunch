@@ -2,17 +2,16 @@ package za.co.wethinkcode.avajlauncher;
 
 public abstract class AircraftFactory
 {
-	/*
-    * Static Method
-    */
-	public static Flyable	newAircraft(String type, String name, int longitude, int latitude, int height)
-	{
-		if (type.equals("Baloon"))
-			return new Baloon(name, new Coordinates(longitude, latitude, height));
-		else if (type.equals("JetPlane"))
-			return new JetPlane(name, new Coordinates(longitude, latitude, height));
-		else if (type.equals("Helicopter"))
-			return new Helicopter(name, new Coordinates(longitude, latitude, height));
+	public static Flyable newAircraft(final String type, final String name, final int longitude, final int latitude, final int height) {
+		final Coordinates coordinates = new Coordinates(Math.max(longitude, 0), Math.max(latitude, 0), height <= 100 ? (Math.max(height, 0)) : 100);
+		switch (type) {
+			case "Balloon":
+				return new Balloon(name, coordinates);
+			case "JetPlane":
+				return new JetPlane(name, coordinates);
+			case "Helicopter":
+				return new Helicopter(name, coordinates);
+		}
 		return null;
 	}
 }
