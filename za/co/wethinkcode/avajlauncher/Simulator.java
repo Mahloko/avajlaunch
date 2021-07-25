@@ -20,7 +20,7 @@ public class Simulator {
 			scenarioReader(reader);
 			parseScenario();
 			for (Flyable fly: VEHICLES)
-			fly.registerTower(tower);
+				fly.registerTower(tower);
 			while (SIMULATIONS-- > 0)
 				tower.changeWeather();
 			try (BufferedWriter writer =  new BufferedWriter(new FileWriter("simulation.txt"))) {

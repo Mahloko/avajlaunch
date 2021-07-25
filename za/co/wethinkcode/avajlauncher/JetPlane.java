@@ -8,36 +8,36 @@ public class JetPlane extends Aircraft implements Flyable {
 	}
 
 	public void	updateConditions() {
-		final String conditions = weatherTower.getWeather(coordinates);
-		switch (conditions) {
+		final String conditions = weatherTower.getWeather(this.coordinates);
+		switch(conditions) {
 			case "RAIN":
-				this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 5, coordinates.getHeight());
-				Simulator.LOG_MESSAGE.add("JetPlane#" + name + "(" + id + ") its raining be careful of the thunder.");
+				this.coordinates = new Coordinates(this.coordinates.getLongitude(), this.coordinates.getLatitude() + 5, this.coordinates.getHeight());
+				Simulator.LOG_MESSAGE.add("JetPlane#"+this.name+"("+this.id+") its raining be careful of the thunder.");
 				break;
 			case "FOG":
-				this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 1, coordinates.getHeight());
-				Simulator.LOG_MESSAGE.add("JetPlane#" + name + "(" + id + ") hope we don't crash, I can't see a thing.");
+				this.coordinates = new Coordinates(this.coordinates.getLongitude(), this.coordinates.getLatitude() + 1, this.coordinates.getHeight());
+				Simulator.LOG_MESSAGE.add("JetPlane#"+this.name+"("+this.id+") hope we don't crash, I can't see a thing.");
 				break;
 			case "SUN":
-				this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 10, coordinates.getHeight() + 2);
-				Simulator.LOG_MESSAGE.add("JetPlane#" + name + "(" + id + ") let's enjoy the weather its sunny out here.");
+				this.coordinates = new Coordinates(this.coordinates.getLongitude(), this.coordinates.getLatitude() + 10, this.coordinates.getHeight() + 2);
+				Simulator.LOG_MESSAGE.add("JetPlane#"+this.name+"("+this.id+") let's enjoy the weather its sunny out here.");
 				break;
 			case "SNOW":
-				this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 7);
-				Simulator.LOG_MESSAGE.add("JetPlane#" + name + "(" + id + ") lets keep the engine warm its freezing out here.");
+				this.coordinates = new Coordinates(this.coordinates.getLongitude(), this.coordinates.getLatitude(), this.coordinates.getHeight() - 7);
+				Simulator.LOG_MESSAGE.add("JetPlane#"+this.name+"("+this.id+") lets keep the engine warm its freezing out here.");
 				break;
 		}
-		if (coordinates.getHeight() == 0) {
-			Simulator.LOG_MESSAGE.add("JetPlane#"+name+"("+id+") Landing ...");
-			weatherTower.unregister(this);
-			Simulator.LOG_MESSAGE.add("Tower says: JetPlane#"+name+"("+id+") unregistered from weather tower.");
-			Simulator.LOG_MESSAGE.add("JetPlane#"+name+"("+id+"): Coordinates -> latitude: " + coordinates.getLatitude() + " longitude: " + coordinates.getLongitude());
+		if (this.coordinates.getHeight() == 0) {
+			Simulator.LOG_MESSAGE.add("JetPlane#"+this.name+"("+this.id+") Landing ...");
+			this.weatherTower.unregister(this);
+			Simulator.LOG_MESSAGE.add("Tower says: JetPlane#"+this.name+"("+this.id+") unregistered from weather tower.");
+			Simulator.LOG_MESSAGE.add("JetPlane#"+this.name+"("+this.id+"): Coordinates -> latitude: "+this.coordinates.getLatitude()+" longitude: "+this.coordinates.getLongitude());
 		}
 	 }
 
-	public void	registerTower(WeatherTower weatherTower) {
+	public void	registerTower(final WeatherTower weatherTower) {
 		this.weatherTower = weatherTower;
-		weatherTower.register(this);
-		Simulator.LOG_MESSAGE.add("Tower says: JetPlane#"+name+"("+id+") registered to weather tower.");
+		this.weatherTower.register(this);
+		Simulator.LOG_MESSAGE.add("Tower says: JetPlane#"+this.name+"("+this.id+") registered to weather tower.");
 	}
 }

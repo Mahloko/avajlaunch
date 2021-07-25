@@ -1,6 +1,6 @@
 ./za/co/wethinkcode/avajlauncher/Aircraft.java
 ./za/co/wethinkcode/avajlauncher/AircraftFactory.java
-./za/co/wethinkcode/avajlauncher/Baloon.java
+./za/co/wethinkcode/avajlauncher/Balloon.java
 ./za/co/wethinkcode/avajlauncher/Coordinates.java
 ./za/co/wethinkcode/avajlauncher/Flyable.java
 ./za/co/wethinkcode/avajlauncher/Helicopter.java

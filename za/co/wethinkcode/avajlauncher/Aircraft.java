@@ -8,8 +8,8 @@ public abstract class Aircraft {
 
 	protected Aircraft(final String name, final Coordinates coordinates) {
 		this.name = name;
+		this.id = nextId();
 		this.coordinates = coordinates;
-		id = nextId();
 	}
 
 	private long nextId() {
